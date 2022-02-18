@@ -10,7 +10,7 @@ const createOptions = {
     body: JSON.stringify(blogPost),
 };
 
-const options = {
+const updateOptions = {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
@@ -18,9 +18,10 @@ const options = {
     body: JSON.stringify(blogPost),
 };
 
-
 fetchMovies().then(movies => console.log(movies));
-// createMovies();
+// createMovie();
+// updateMovie(10);
+// deleteMovie(8);
 
 function fetchMovies(){
     return fetch(url).then(function (result){
@@ -30,8 +31,20 @@ function fetchMovies(){
     });
 }
 
-function createMovies() {
+function createMovie() {
     fetch(url, createOptions).then(function (result){
         console.log('post created successfully');
+    });
+}
+
+function updateMovie(id) {
+    fetch(`${url}/${id}`, updateOptions).then(function (result){
+        console.log('updated successfully');
+    });
+}
+
+function deleteMovie(id){
+    fetch(`${url}/${id}`,{method: 'DELETE'}).then(function (result){
+        console.log('deleted successfully');
     });
 }
