@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Movie Database</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 </head>
 <body>
 
+<div id="movie-container" class="row">
 
+</div>
+
+<div>
+    <h3>Create Movie!</h3>
+    <label for="moviesTitle"></label><input placeholder="title" type="text" name="title" id="moviesTitle">
+    <label for="moviesRating"></label><input placeholder="rating" type="text" name="rating" id="moviesRating">
+    <button id="create-movie-btn">Create</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 <script src="movie-database.js"></script>
 </body>
 </html>
