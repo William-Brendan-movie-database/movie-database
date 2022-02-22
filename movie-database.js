@@ -134,12 +134,31 @@ $(document).on('click', '.edit-btn', function (){
             }
         }
     });
+    $('.update-btn').click(function (){
+        let updatedMovie = {
+            title: $('#titleForm').val(),
+            plot: $('#plotForm').val(),
+            year: $('#yearForm').val(),
+            rating: $('#ratingForm').val(),
+            director: $('#directorForm').val()
+        }
 
+        const updateOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedMovie),
+        };
+        updateMovie(id, updateOptions);
+    });
 });
 
 $(document).on('click','.delete-btn',function(){
     deleteMovie($(this).val());
 });
-$(document).on('click', '.dismiss-btn', function (){
-    $('#exampleModal').css('display', 'none')
-});
+// $(document).on('click', '.dismiss-btn', function (){
+//     $('#exampleModal').css('display', 'none')
+// });
+
+
