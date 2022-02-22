@@ -1,0 +1,13 @@
+.movie-box {
+    background-color: grey;
+}
+.card-id{
+    font-size: 1em;
+    opacity: .3;
+}
+.title {
+    font-weight: bold;
+}
+.card-plot{
+    height: 300px;
+}

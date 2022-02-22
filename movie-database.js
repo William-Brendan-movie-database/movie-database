@@ -2,14 +2,6 @@
 const url = 'https://standing-zest-glass.glitch.me/movies';
 const blogPost = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
 
-const createOptions = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(blogPost),
-};
-
 const updateOptions = {
     method: 'PUT',
     headers: {
@@ -21,7 +13,7 @@ const updateOptions = {
 fetchMovies().then(r => console.log(r))
 // createMovie();
 // updateMovie(10);
-// deleteMovie(8);
+// deleteMovie(266);
 appendMovies();
 
 function fetchMovies(){
@@ -39,10 +31,22 @@ function appendMovies() {
         for (let movie of movies) {
             $('#movie-container').append(
                 `
-                <div class="col-6 id-${movie.id} row">
-                    <div class="col-6">${movie.title}<span class="ml-3">${movie.year}</span></div>
-                    <div class="col-6">${movie.rating}/5</div>
-                    <div class="offset-10"><button id="delete-btn">delete</button></div>
+                <div class="card col-12 col-sm-5 col-md-3 m-1">
+                  <div class="card-body card-plot">
+                    <h5 class="card-title title">${movie.title}</h5>
+                    <p class="card-text">${movie.plot}</p>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Year: ${movie.year}</li>
+                    <li class="list-group-item">Rating: ${movie.rating}/5</li>
+                    <li class="list-group-item">Director: ${movie.director}</li>
+                  </ul>
+                  <div class="card-body d-flex justify-content-between">
+                    <button class="edit-btn btn btn-dark" value="${movie.id}">edit</button>
+
+                    
+                    <button class="delete-btn btn btn-dark" value="${movie.id}">delete</button>
+                  </div>
                 </div>
                 `
             )
@@ -69,25 +73,34 @@ function deleteMovie(id){
 }
 
 
+function movieInfo(){
+    let movieTitle = $('#moviesTitle').val();
+    let movieRating = $('#moviesRating').val();
+    let movieYear = $('#moviesYear').val();
+    let moviePlot = $('#moviesPlot').val();
 
+
+    let movie = {
+        title: movieTitle,
+        rating: movieRating,
+        year: movieYear,
+        plot: moviePlot
+    }
+
+    return movie;
+}
 
 
 
 $('#create-movie-btn').click(function (e){
-    let movieTitle = $('#moviesTitle').val();
-    let movieRating = $('#moviesRating').val();
 
-    let movie = {
-        title: movieTitle,
-        rating: movieRating
-    }
 
     let createOptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(movie),
+        body: JSON.stringify(movieInfo()),
     };
 
     createMovie(createOptions)
@@ -95,4 +108,10 @@ $('#create-movie-btn').click(function (e){
 
 });
 
-$('')
+// $('.delete-btn').click(function (e){
+//     console.log('test')
+// });
+
+$(document).on('click','.delete-btn',function(){
+    deleteMovie($(this).val());
+});
