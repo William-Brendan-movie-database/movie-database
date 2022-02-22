@@ -42,7 +42,10 @@ function appendMovies() {
                     <li class="list-group-item">Director: ${movie.director}</li>
                   </ul>
                   <div class="card-body d-flex justify-content-between">
-                    <button class="edit-btn btn btn-dark" value="${movie.id}">edit</button>
+                  
+                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="edit-btn btn btn-dark" value="${movie.id}">edit</button>
+                    
+                
 
                     
                     <button class="delete-btn btn btn-dark" value="${movie.id}">delete</button>
@@ -60,7 +63,7 @@ function createMovie(movieInfo) {
     });
 }
 
-function updateMovie(id) {
+function updateMovie(id, updateOptions) {
     fetch(`${url}/${id}`, updateOptions).then(function (result){
         console.log('updated successfully');
     });
@@ -78,13 +81,15 @@ function movieInfo(){
     let movieRating = $('#moviesRating').val();
     let movieYear = $('#moviesYear').val();
     let moviePlot = $('#moviesPlot').val();
+    let movieDirector = $('#moviesDirector').val();
 
 
     let movie = {
         title: movieTitle,
         rating: movieRating,
         year: movieYear,
-        plot: moviePlot
+        plot: moviePlot,
+        director: movieDirector
     }
 
     return movie;
@@ -112,6 +117,29 @@ $('#create-movie-btn').click(function (e){
 //     console.log('test')
 // });
 
+$(document).on('click', '.edit-btn', function (){
+    let id = parseInt($(this).val())
+    console.log(id)
+
+    fetchMovies().then(movies => {
+        for (let movie of movies) {
+            if (id === movie.id){
+
+                $('#titleForm').val(movie.title);
+                $('#plotForm').val(movie.plot);
+                $('#yearForm').val(movie.year);
+                $('#ratingForm').val(movie.rating);
+                $('#directorForm').val(movie.title);
+
+            }
+        }
+    });
+
+});
+
 $(document).on('click','.delete-btn',function(){
     deleteMovie($(this).val());
+});
+$(document).on('click', '.dismiss-btn', function (){
+    $('#exampleModal').css('display', 'none')
 });
