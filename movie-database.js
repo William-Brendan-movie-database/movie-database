@@ -25,9 +25,8 @@ function fetchMovies(){
 }
 
 function appendMovies() {
-    $('#movie-container').html('Loading...')
     fetchMovies().then(function (movies){
-        $('#movie-container').text('');
+        $('#movie-container').html('');
         for (let movie of movies) {
             $('#movie-container').append(
                 `
