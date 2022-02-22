@@ -54,7 +54,7 @@ function createMovie(movieInfo) {
 function updateMovie(id, updateOptions) {
     fetch(`${url}/${id}`, updateOptions).then(function (result){
         console.log('updated successfully');
-        appendMovies()
+        appendMovies();
     });
 }
 
@@ -99,6 +99,16 @@ function titleSort(){
         console.log(movies)
     });
 }
+yearSort();
+function yearSort(){
+    fetchMovies().then(movies => {
+        movies.sort((a, b) => {
+            if (a.year < b.year) return -1
+            return a.year > b.year ? 1 : 0
+        })
+        console.log(movies);
+    });
+}
 
 
 
@@ -132,7 +142,7 @@ $(document).on('click', '.edit-btn', function (){
                 $('#plotForm').val(movie.plot);
                 $('#yearForm').val(movie.year);
                 $('#ratingForm').val(movie.rating);
-                $('#directorForm').val(movie.title);
+                $('#directorForm').val(movie.director);
 
             }
         }
@@ -147,7 +157,7 @@ $(document).on('click', '.edit-btn', function (){
             director: $('#directorForm').val()
         }
 
-        const updateOptions = {
+        let updateOptions = {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -155,6 +165,8 @@ $(document).on('click', '.edit-btn', function (){
             body: JSON.stringify(updatedMovie),
         };
         updateMovie(id, updateOptions);
+        appendMovies();
+        fetchMovies().then(r => console.log(r))
     });
 });
 
@@ -165,5 +177,14 @@ $(document).on('click','.delete-btn',function(){
 $('#titleFilter').click(e => {
     titleSort()
 });
+$('#yearFilter').click(e => {
+    console.log("sort by year")
+})
+$('#ratingFilter').click(e => {
+    console.log("sort by rating")
+})
+$('#directorFilter').click(e => {
+    console.log("sort by director")
+})
 
 
