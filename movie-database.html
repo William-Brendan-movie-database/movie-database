@@ -19,20 +19,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link yellow-text" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link yellow-text" href="#" id="test-btn">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link yellow-text" href="#" data-toggle="modal" data-target="#createMovieModal">Create Movie</a>
+                    <a class="nav-link yellow-text" href="#" data-toggle="modal" data-target="#createMovieModal">Add Movie</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle yellow-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Filter by
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#" id="titleFilter">Title</a>
+                        <a class="dropdown-item" href="#">Year</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Director</a>
                     </div>
                 </li>
             </ul>
@@ -127,23 +127,23 @@
                 <form id="create-form">
                     <div class="form-group">
                         <label for="titleForm">Title</label>
-                        <input type="email" class="form-control" id="moviesTitle" placeholder="title">
+                        <input type="email" class="form-control modal-background" id="moviesTitle" placeholder="title">
                     </div>
                     <div class="form-group">
                         <label for="plotForm">Plot</label>
-                        <textarea class="form-control" id="moviesPlot" rows="3"></textarea>
+                        <textarea class="form-control modal-background" id="moviesPlot" rows="3"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="yearForm">Year</label>
-                        <input type="email" class="form-control" id="moviesYear" placeholder="year">
+                        <input type="email" class="form-control modal-background" id="moviesYear" placeholder="year">
                     </div>
                     <div class="form-group">
                         <label for="ratingForm">Rating</label>
-                        <input type="email" class="form-control" id="moviesRating" placeholder="rating / 5">
+                        <input type="email" class="form-control modal-background" id="moviesRating" placeholder="rating / 5">
                     </div>
                     <div class="form-group">
                         <label for="directorForm">Director</label>
-                        <input type="email" class="form-control" id="moviesDirector" placeholder="Director">
+                        <input type="email" class="form-control modal-background" id="moviesDirector" placeholder="Director">
                     </div>
                 </form>
             </div>

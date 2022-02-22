@@ -70,3 +70,13 @@ textarea{
     color: #ffc300;
     opacity: .7;
 }
+.modal-content {
+    background-color: #ffd60a;
+    color: #001d3d;
+}
+.modal-background {
+    background-color: #ffeb90;
+}
+.modal-background::placeholder {
+    color: #001d3d;
+}

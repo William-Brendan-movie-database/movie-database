@@ -1,19 +1,7 @@
 
 const url = 'https://standing-zest-glass.glitch.me/movies';
-const blogPost = {title: 'Ajax Requests', body: 'Are a fun way to use JS!'};
-
-const updateOptions = {
-    method: 'PUT',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(blogPost),
-};
 
 fetchMovies().then(r => console.log(r))
-// createMovie();
-// updateMovie(10);
-// deleteMovie(266);
 appendMovies();
 
 function fetchMovies(){
@@ -24,12 +12,9 @@ function fetchMovies(){
     });
 }
 
-function appendMovies() {
-    fetchMovies().then(function (movies){
-        $('#movie-container').html('');
-        for (let movie of movies) {
-            $('#movie-container').append(
-                `
+function htmlDisplay(movie){
+    return $('#movie-container').append(
+        `
                 <div class="card col-12 col-sm-5 col-md-3 m-1 py-2">
                   <div class="card-body card-plot">
                     <h5 class="card-title title">${movie.title}</h5>
@@ -37,21 +22,24 @@ function appendMovies() {
                   </div>
                   <ul class="list-group list-group-flush card-list">
                     <li class="list-group-item">Year: ${movie.year}</li>
-                    <li class="list-group-item">Rating: ${movie.rating}/5</li>
+                    <li class="list-group-item">Rating: ${movie.rating} / 5</li>
                     <li class="list-group-item">Director: ${movie.director}</li>
                   </ul>
-                  <div class="card-body d-flex justify-content-between">
+                  <div class="card-body d-flex justify-content-end">
                   
-                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="edit-btn btn" value="${movie.id}">edit</button>
-                    
-                
-
-                    
-                    <button class="delete-btn btn" value="${movie.id}">delete</button>
+                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="edit-btn btn m-1" value="${movie.id}">edit</button>
+                    <button class="delete-btn btn m-1" value="${movie.id}">delete</button>
                   </div>
                 </div>
                 `
-            )
+    )
+}
+
+function appendMovies() {
+    fetchMovies().then(function (movies){
+        $('#movie-container').html('');
+        for (let movie of movies) {
+            htmlDisplay(movie)
         }
     });
 }
@@ -86,15 +74,30 @@ function movieInfo(){
     let movieDirector = $('#moviesDirector').val();
 
 
-    let movie = {
+    return {
         title: movieTitle,
         rating: movieRating,
         year: movieYear,
         plot: moviePlot,
         director: movieDirector
-    }
+    };
+}
 
-    return movie;
+function titleSort(){
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+        movies.sort((a, b) => {
+            if (a.title < b.title) return -1
+            return a.title > b.title ? 1 : 0
+        })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
+        console.log(movies)
+    });
 }
 
 
@@ -115,9 +118,7 @@ $('#create-movie-btn').click(function (e){
 
 });
 
-// $('.delete-btn').click(function (e){
-//     console.log('test')
-// });
+
 
 $(document).on('click', '.edit-btn', function (){
     let id = parseInt($(this).val())
@@ -136,6 +137,7 @@ $(document).on('click', '.edit-btn', function (){
             }
         }
     });
+
     $('.update-btn').click(function (){
         let updatedMovie = {
             title: $('#titleForm').val(),
@@ -153,16 +155,15 @@ $(document).on('click', '.edit-btn', function (){
             body: JSON.stringify(updatedMovie),
         };
         updateMovie(id, updateOptions);
-
-        $('#exampleModal')
     });
 });
 
 $(document).on('click','.delete-btn',function(){
     deleteMovie($(this).val());
 });
-// $(document).on('click', '.dismiss-btn', function (){
-//     $('#exampleModal').css('display', 'none')
-// });
+
+$('#titleFilter').click(e => {
+    titleSort()
+});
 
 
