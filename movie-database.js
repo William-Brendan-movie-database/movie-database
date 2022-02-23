@@ -15,7 +15,7 @@ function fetchMovies(){
 function htmlDisplay(movie){
     return $('#movie-container').append(
         `
-                <div class="card col-12 col-sm-5 col-md-3 m-1 py-2">
+                <div class="card col-12 col-sm-5 col-md-3 m-3 p-1">
                   <div class="card-body card-plot">
                     <h5 class="card-title title">${movie.title}</h5>
                     <p class="card-text">${movie.plot}</p>
