@@ -99,7 +99,7 @@ function titleSort(){
         console.log(movies)
     });
 }
-yearSort();
+// yearSort();
 function yearSort(){
     fetchMovies().then(movies => {
         movies.sort((a, b) => {
@@ -138,6 +138,7 @@ $(document).on('click', '.edit-btn', function (){
         for (let movie of movies) {
             if (id === movie.id){
 
+                $('#formId').val(movie.id);
                 $('#titleForm').val(movie.title);
                 $('#plotForm').val(movie.plot);
                 $('#yearForm').val(movie.year);
@@ -147,27 +148,30 @@ $(document).on('click', '.edit-btn', function (){
             }
         }
     });
+});
 
-    $('.update-btn').click(function (){
-        let updatedMovie = {
-            title: $('#titleForm').val(),
-            plot: $('#plotForm').val(),
-            year: $('#yearForm').val(),
-            rating: $('#ratingForm').val(),
-            director: $('#directorForm').val()
-        }
 
-        let updateOptions = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedMovie),
-        };
-        updateMovie(id, updateOptions);
-        appendMovies();
-        fetchMovies().then(r => console.log(r))
-    });
+$(document).on('click', '.update-btn', function (){
+    let id = parseInt($('#formId').val());
+
+    let updatedMovie = {
+        title: $('#titleForm').val(),
+        plot: $('#plotForm').val(),
+        year: $('#yearForm').val(),
+        rating: $('#ratingForm').val(),
+        director: $('#directorForm').val()
+    }
+    console.log(updatedMovie);
+
+    let updateOptions = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedMovie),
+    };
+    updateMovie(id, updateOptions);
+    fetchMovies().then(r => console.log(r))
 });
 
 $(document).on('click','.delete-btn',function(){
