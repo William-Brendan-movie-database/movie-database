@@ -83,7 +83,7 @@ function movieInfo(){
     };
 }
 
-function titleSort(){
+function titleAToZSort(){
     fetchMovies().then(movies => {
         $('#movie-container').html('');
 
@@ -99,13 +99,54 @@ function titleSort(){
         console.log(movies)
     });
 }
-// yearSort();
-function yearSort(){
+
+function titleZToASort(){
     fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+        movies.sort((a, b) => {
+            if (b.title < a.title) return -1
+            return b.title > a.title ? 1 : 0
+        })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
+        console.log(movies)
+    });
+}
+// yearSort();
+function yearSortLowHigh(){
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
         movies.sort((a, b) => {
             if (a.year < b.year) return -1
             return a.year > b.year ? 1 : 0
         })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
+        console.log(movies);
+    });
+}
+
+function yearSortHighLow(){
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+        movies.sort((a, b) => {
+            if (b.year < a.year) return -1
+            return b.year > a.year ? 1 : 0
+        })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
         console.log(movies);
     });
 }
@@ -175,20 +216,28 @@ $(document).on('click', '.update-btn', function (){
 });
 
 $(document).on('click','.delete-btn',function(){
-    deleteMovie($(this).val());
+    let deleteConfirmation = confirm('Are you sure you want to delete?')
+
+    if (deleteConfirmation){
+        deleteMovie($(this).val());
+    }
 });
 
-$('#titleFilter').click(e => {
-    titleSort()
+$('#titleAToZFilter').click(e => {
+    titleAToZSort()
 });
-$('#yearFilter').click(e => {
-    console.log("sort by year")
+$('#titleZToAFilter').click(e => {
+    titleZToASort()
+});
+$('#yearLowHighFilter').click(e => {
+    yearSortLowHigh();
+})
+$('#yearHighLowFilter').click(e => {
+    yearSortHighLow();
 })
 $('#ratingFilter').click(e => {
     console.log("sort by rating")
 })
-$('#directorFilter').click(e => {
-    console.log("sort by director")
-})
+
 
 
