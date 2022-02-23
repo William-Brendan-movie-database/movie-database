@@ -151,6 +151,40 @@ function yearSortHighLow(){
     });
 }
 
+function ratingSortHighLow(){
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+        movies.sort((a, b) => {
+            if (b.rating < a.rating) return -1
+            return b.rating > a.rating ? 1 : 0
+        })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
+        console.log(movies);
+    });
+}
+
+function ratingSortLowHigh(){
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+        movies.sort((a, b) => {
+            if (a.rating < b.rating) return -1
+            return a.rating > b.rating ? 1 : 0
+        })
+
+        for (let movie of movies) {
+            htmlDisplay(movie)
+        }
+
+        console.log(movies);
+    });
+}
+
 
 
 $('#create-movie-btn').click(function (e){
@@ -235,8 +269,11 @@ $('#yearLowHighFilter').click(e => {
 $('#yearHighLowFilter').click(e => {
     yearSortHighLow();
 })
-$('#ratingFilter').click(e => {
-    console.log("sort by rating")
+$('#ratingHighLowFilter').click(e => {
+    ratingSortHighLow();
+})
+$('#ratingLowHighFilter').click(e => {
+    ratingSortLowHigh()
 })
 
 
