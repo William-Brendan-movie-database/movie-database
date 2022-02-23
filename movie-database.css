@@ -80,6 +80,9 @@ textarea{
 .modal-background::placeholder {
     color: #001d3d;
 }
-.container {
-
+.jumbotron {
+    width: 70%;
+    margin: auto;
+    background-image: url("https://image.scoopwhoop.com/w700-120-cfix/https://s4.scoopwhoop.com/anj/sw/e4401105-d15b-4e39-953a-433195c8ab00.jpg");
+    background-size: contain;
 }
