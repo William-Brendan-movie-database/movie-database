@@ -15,7 +15,7 @@ function fetchMovies(){
 function htmlDisplay(movie){
     return $('#movie-container').append(
         `
-                <div class="card col-12 col-sm-5 col-md-3 m-3 p-1">
+                <div class="card col-10 col-sm-5 col-md-3 m-3 p-1">
                   <div class="card-body card-plot">
                     <h5 class="card-title title">${movie.title}</h5>
                     <p class="card-text">${movie.plot}</p>
@@ -275,6 +275,21 @@ $('#ratingHighLowFilter').click(e => {
 $('#ratingLowHighFilter').click(e => {
     ratingSortLowHigh()
 })
+
+$('#search-bar').keyup(function (e) {
+    let searchBarValue = $(this).val().toLowerCase();
+    fetchMovies().then(movies => {
+        $('#movie-container').html('');
+
+
+        for (let movie of movies) {
+            let lowercaseTitle = movie.title.toLowerCase()
+            if (lowercaseTitle.includes(searchBarValue)){
+                htmlDisplay(movie)
+            }
+        }
+    })
+});
 
 
 
