@@ -57,7 +57,8 @@ textarea{
     font-weight: bold;
 }
 .card-plot{
-    height: 300px;
+    height: 275px;
+    overflow: scroll;
 }
 .btn{
     background-color: #001d3d;
