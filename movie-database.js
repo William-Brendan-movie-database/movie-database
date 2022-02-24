@@ -1,9 +1,10 @@
 
 const url = 'https://standing-zest-glass.glitch.me/movies';
 
-fetchMovies().then(r => console.log(r))
+fetchMovies().then(r => console.log(r));
+//populates the html on start up
 appendMovies();
-
+//function sends fetch request to the movie database and returns movie array
 function fetchMovies(){
     return fetch(url).then(function (result){
         return result.json();
@@ -11,7 +12,7 @@ function fetchMovies(){
         return movies;
     });
 }
-
+//htmlDisplay function appends the html with movies data to the movie-container div
 function htmlDisplay(movie){
     return $('#movie-container').append(
         `
@@ -34,7 +35,7 @@ function htmlDisplay(movie){
                 `
     )
 }
-
+//appendMovies function calls fetchMovies function and loops through each movie and appends it to html
 function appendMovies() {
     fetchMovies().then(function (movies){
         $('#movie-container').html('');
@@ -43,21 +44,21 @@ function appendMovies() {
         }
     });
 }
-
+//createMovie function adds movie to database then updates html
 function createMovie(movieInfo) {
     fetch(url, movieInfo).then(function (result){
         console.log('post created successfully');
         appendMovies()
     });
 }
-
+//updateMovie function updates a movie in the database and updates html
 function updateMovie(id, updateOptions) {
     fetch(`${url}/${id}`, updateOptions).then(function (result){
         console.log('updated successfully');
         appendMovies();
     });
 }
-
+//deleteMovie function deletes a movie from the database and updates html
 function deleteMovie(id){
     fetch(`${url}/${id}`,{method: 'DELETE'}).then(function (result){
         console.log('deleted successfully');
@@ -65,7 +66,7 @@ function deleteMovie(id){
     });
 }
 
-
+//movieInfo function gets the values that are in the createMovie modal, returns the info as an object
 function movieInfo(){
     let movieTitle = $('#moviesTitle').val();
     let movieRating = $('#moviesRating').val();
@@ -116,7 +117,7 @@ function titleZToASort(){
         console.log(movies)
     });
 }
-// yearSort();
+
 function yearSortLowHigh(){
     fetchMovies().then(movies => {
         $('#movie-container').html('');
@@ -186,7 +187,6 @@ function ratingSortLowHigh(){
 }
 
 
-
 $('#create-movie-btn').click(function (e){
 
 
@@ -202,8 +202,6 @@ $('#create-movie-btn').click(function (e){
     fetchMovies().then(r => console.log(r));
 
 });
-
-
 
 $(document).on('click', '.edit-btn', function (){
     let id = parseInt($(this).val())
@@ -224,7 +222,6 @@ $(document).on('click', '.edit-btn', function (){
         }
     });
 });
-
 
 $(document).on('click', '.update-btn', function (){
     let id = parseInt($('#formId').val());
