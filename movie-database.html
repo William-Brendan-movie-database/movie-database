@@ -85,7 +85,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update movie</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -102,16 +102,32 @@
                         <textarea class="form-control" id="plotForm" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="yearForm">Year</label>
-                        <input type="email" class="form-control" id="yearForm" placeholder="year">
-                    </div>
-                    <div class="form-group">
-                        <label for="ratingForm">Rating</label>
-                        <input type="email" class="form-control" id="ratingForm" placeholder="rating / 5">
+                        <div class="row">
+                            <div class="col">
+                                <label for="yearForm">Year</label>
+                                <input type="email" class="form-control modal-background" id="yearForm" placeholder="year">
+                            </div>
+                            <div class="col">
+                                <label for="ratingForm">Rating</label>
+                                <input type="email" class="form-control modal-background" id="ratingForm" placeholder="rating">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="directorForm">Director</label>
                         <input type="email" class="form-control" id="directorForm" placeholder="Director">
+                    </div>
+                    <div class="form-group">
+                        <label for="actorsForm">Actors</label>
+                        <input type="email" class="form-control modal-background" id="actorsForm" placeholder="Actors">
+                    </div>
+                    <div class="form-group">
+                        <label for="genreForm">Genre</label>
+                        <input type="email" class="form-control modal-background" id="genreForm" placeholder="Genre">
+                    </div>
+                    <div class="form-group">
+                        <label for="posterForm">Poster url</label>
+                        <input type="email" class="form-control modal-background" id="posterForm" placeholder="url">
                     </div>
                 </form>
             </div>
@@ -123,12 +139,12 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Create Modal -->
 <div class="modal fade" id="createMovieModal" tabindex="-1" role="dialog" aria-labelledby="createMovieModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createMovieModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="createMovieModalLabel">Movie creation</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -144,16 +160,32 @@
                         <textarea class="form-control modal-background" id="moviesPlot" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="yearForm">Year</label>
-                        <input type="email" class="form-control modal-background" id="moviesYear" placeholder="year">
-                    </div>
-                    <div class="form-group">
-                        <label for="ratingForm">Rating</label>
-                        <input type="email" class="form-control modal-background" id="moviesRating" placeholder="rating / 5">
+                        <div class="row">
+                            <div class="col">
+                                <label for="moviesYear">Year</label>
+                                <input type="email" class="form-control modal-background" id="moviesYear" placeholder="year">
+                            </div>
+                            <div class="col">
+                                <label for="moviesRating">Rating</label>
+                                <input type="email" class="form-control modal-background" id="moviesRating" placeholder="rating">
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="directorForm">Director</label>
                         <input type="email" class="form-control modal-background" id="moviesDirector" placeholder="Director">
+                    </div>
+                    <div class="form-group">
+                        <label for="directorForm">Actors</label>
+                        <input type="email" class="form-control modal-background" id="moviesActors" placeholder="Actors">
+                    </div>
+                    <div class="form-group">
+                        <label for="directorForm">Genre</label>
+                        <input type="email" class="form-control modal-background" id="moviesGenre" placeholder="Genre">
+                    </div>
+                    <div class="form-group">
+                        <label for="moviesPoster">Poster url</label>
+                        <input type="email" class="form-control modal-background" id="moviesPoster" placeholder="url">
                     </div>
                 </form>
             </div>

@@ -49,6 +49,16 @@ textarea{
 .card-list>li:last-of-type{
     border-radius: 0 0 10px 10px;
 }
+.card-list-horizontal>li{
+    background-color: #003566;
+    width: 100%;
+}
+.card-list-horizontal>li:nth-of-type(1){
+    /*border-radius: 10px 10px 0 0;*/
+}
+.card-list-horizontal>li:last-of-type{
+    border-radius: 0 10px 10px 10px;
+}
 .card-id{
     font-size: 1em;
     opacity: .3;

@@ -1,5 +1,5 @@
 
-const url = 'https://standing-zest-glass.glitch.me/movies';
+const url = 'http://localhost:8080/movies';
 
 fetchMovies().then(r => console.log(r));
 //populates the html on start up
@@ -21,10 +21,14 @@ function htmlDisplay(movie){
                     <h5 class="card-title title">${movie.title}</h5>
                     <p class="card-text">${movie.plot}</p>
                   </div>
-                  <ul class="list-group list-group-flush card-list">
+                  <ul class="list-group list-group-flush list-group-horizontal card-list-horizontal">
                     <li class="list-group-item">Year: ${movie.year}</li>
                     <li class="list-group-item">Rating: ${movie.rating} / 5</li>
-                    <li class="list-group-item">Director: ${movie.director}</li>
+                  </ul>
+                  <ul class="list-group list-group-flush card-list">
+                     <li class="list-group-item">Director: ${movie.director}</li>
+                     <li class="list-group-item">Actors: ${movie.actors}</li>
+                     <li class="list-group-item">Genre: ${movie.genre}</li>
                   </ul>
                   <div class="card-body d-flex justify-content-end">
                   
@@ -49,6 +53,7 @@ function createMovie(movieInfo) {
     fetch(url, movieInfo).then(function (result){
         console.log('post created successfully');
         appendMovies()
+        console.log(fetchMovies());
     });
 }
 //updateMovie function updates a movie in the database and updates html
@@ -56,6 +61,8 @@ function updateMovie(id, updateOptions) {
     fetch(`${url}/${id}`, updateOptions).then(function (result){
         console.log('updated successfully');
         appendMovies();
+        fetchMovies().then(r => console.log(r));
+
     });
 }
 //deleteMovie function deletes a movie from the database and updates html
@@ -70,18 +77,24 @@ function deleteMovie(id){
 function movieInfo(){
     let movieTitle = $('#moviesTitle').val();
     let movieRating = $('#moviesRating').val();
+    let moviePoster = $('#moviesPoster').val();
     let movieYear = $('#moviesYear').val();
+    let movieGenre = $('#moviesGenre').val();
     let moviePlot = $('#moviesPlot').val();
+    let movieActors = $('#moviesActors').val();
     let movieDirector = $('#moviesDirector').val();
 
 
-    return {
+    return [{
         title: movieTitle,
         rating: movieRating,
+        poster: moviePoster,
         year: movieYear,
+        genre: movieGenre,
+        director: movieDirector,
         plot: moviePlot,
-        director: movieDirector
-    };
+        actors: movieActors
+    }];
 }
 
 function titleAToZSort(){
@@ -217,6 +230,9 @@ $(document).on('click', '.edit-btn', function (){
                 $('#yearForm').val(movie.year);
                 $('#ratingForm').val(movie.rating);
                 $('#directorForm').val(movie.director);
+                $('#posterForm').val(movie.poster);
+                $('#genreForm').val(movie.genre);
+                $('#actorsForm').val(movie.actors);
 
             }
         }
@@ -231,19 +247,21 @@ $(document).on('click', '.update-btn', function (){
         plot: $('#plotForm').val(),
         year: $('#yearForm').val(),
         rating: $('#ratingForm').val(),
-        director: $('#directorForm').val()
+        director: $('#directorForm').val(),
+        poster: $('#posterForm').val(),
+        genre: $('#genreForm').val(),
+        actors: $('#actorsForm').val()
     }
     console.log(updatedMovie);
 
     let updateOptions = {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(updatedMovie),
     };
     updateMovie(id, updateOptions);
-    fetchMovies().then(r => console.log(r))
 });
 
 $(document).on('click','.delete-btn',function(){
